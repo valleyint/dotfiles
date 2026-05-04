@@ -1,0 +1,81 @@
+# Variables
+set $mainMod Mod4
+set $ipc qs -c noctalia-shell ipc call
+
+# Monitors
+output HDMI-A-1 mode 3840x2160@60Hz pos 0 0 scale 2
+
+# Appearance
+gaps inner 2
+gaps outer 6
+border_width 2
+color_active 0xc4a7e7ff
+rounding 15
+opacity active 0.9
+opacity inactive 0.75
+
+# Blur (if supported by your compositor backend)
+blur enable
+blur_size 2
+blur_passes 2
+
+# Environment
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+env QT_QPA_PLATFORMTHEME qt6ct
+env XCURSOR_SIZE 24
+
+# Autostart
+exec_once qs -c noctalia-shell
+exec_once $ipc bar toggle
+exec /home/darshan/control-music/daemon/main
+
+# Keybinds - General
+bind $mainMod+Shift+C kill
+bind $mainMod+Shift+M exit
+bind $mainMod+V floating toggle
+bind $mainMod+R exec $ipc launcher toggle
+bind $mainMod+T exec /home/darshan/scripts/time/time
+bind $mainMod+S exec $ipc settings toggle
+bind $mainMod+B exec $ipc bar toggle
+bind $mainMod+L exec $ipc sessionMenu toggle
+
+# Navigation
+bind $mainMod+Left focus left
+bind $mainMod+Right focus right
+bind $mainMod+Up focus up
+bind $mainMod+Down focus down
+
+# Workspaces and Wallpapers
+# Workspace 1
+bind $mainMod+1 workspace 1
+bind $mainMod+Shift+1 move workspace 1
+# Workspace 2
+bind $mainMod+2 workspace 2
+bind $mainMod+Shift+2 move workspace 2
+# Workspace 3
+bind $mainMod+3 workspace 3
+bind $mainMod+Shift+3 move workspace 3
+# Workspace 4
+bind $mainMod+4 workspace 4
+bind $mainMod+Shift+4 move workspace 4
+# Workspace 5
+bind $mainMod+5 workspace 5
+bind $mainMod+Shift+5 move workspace 5
+
+# Workspace 6-0
+bind $mainMod+6 workspace 6
+bind $mainMod+7 workspace 7
+bind $mainMod+8 workspace 8
+bind $mainMod+9 workspace 9
+bind $mainMod+0 workspace 10
+
+bind $mainMod+Shift+6 move workspace 6
+bind $mainMod+Shift+7 move workspace 7
+bind $mainMod+Shift+8 move workspace 8
+bind $mainMod+Shift+9 move workspace 9
+bind $mainMod+Shift+0 move workspace 10
+
+# Input
+input "epic-mouse-v1" {
+    sensitivity -0.5
+}
